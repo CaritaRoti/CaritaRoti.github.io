@@ -4,6 +4,9 @@
     <div v-for="camera in cameras">
         <h2>{{ camera.full_name }}</h2>
     </div>
+    <div v-for="imageURL in imageURLs" class="cameraImg">
+        <img :src=imageURL>
+    </div>
 </template>
 
 <script>
@@ -15,8 +18,7 @@ export default {
         return {
             roverStatus: '',
             photoDate: '',
-            cameras: [],
-            imageURLs: {},
+            imageURLs: [],
             apiAddress: 'https://mars-photos.herokuapp.com/api/v1/rovers/curiosity/latest_photos'
         }
     },
@@ -34,6 +36,10 @@ export default {
         getData(data) {
             this.roverStatus = data.latest_photos[0].rover.status
             this.photoDate = data.latest_photos[0].earth_date
+            for (let i = 0; i < data.latest_photos.length; ++i) {
+                this.imageURLs.push(data.latest_photos[i].img_src)
+            }
+            console.log(this.imageURLs)
             return
         }
     }
