@@ -1,5 +1,9 @@
 <template>
-    <h2>{{ roverStatus }}</h2>
+    <h2>status: {{ roverStatus }}</h2>
+    <h2>Latest photos taken on: {{ photoDate }}</h2>
+    <div v-for="camera in cameras">
+        <h2>{{ camera.full_name }}</h2>
+    </div>
 </template>
 
 <script>
@@ -9,15 +13,31 @@ export default {
     name: 'CuriosityCamera',
     data() {
         return {
-            roverStatus: []
+            roverStatus: '',
+            photoDate: '',
+            cameras: [],
+            imageURLs: {},
+            apiAddress: 'https://mars-photos.herokuapp.com/api/v1/rovers/curiosity/latest_photos'
         }
     },
     mounted() {
-        fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity?api_key=kssS7ws0hOckIYyOU1hfhv0s3yjGCOam1LypP6r3')
+        fetch(this.apiAddress)
             .then(res => res.json())
-            .then(data => this.roverStatus = data.rover.status)
+            .then(data => this.getData(data))
             .catch(err => console.log(err.message))
+    },
+    methods: {
+        /**
+         * Updates variables according to the given data
+         * @param {*} data
+         */
+        getData(data) {
+            this.roverStatus = data.latest_photos[0].rover.status
+            this.photoDate = data.latest_photos[0].earth_date
+            return
+        }
     }
+    
 }
 
 </script>
