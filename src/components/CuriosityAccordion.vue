@@ -1,3 +1,8 @@
+/**
+  * CuriosityAccordion is a primitive component to build accordion elements.
+  * Clicking the accordion button toggles the content display.
+  */
+
 <template>
   <div>
     <button

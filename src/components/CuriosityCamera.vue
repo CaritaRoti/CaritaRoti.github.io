@@ -1,7 +1,18 @@
+/**
+  * CuriosityCamera fetches photos from the NASA Curiosity API and displays them in
+  * accordion type elements grouped by the camera used to take the photos.
+  */
+
 <template>
+    <span id="site-blurb">
+        CuriosityCam displays the latest photos taken by the NASA Mars rover Curiosity.
+        The site updates each day at 00:00 (GMT+0), fetching the images Curiosity has taken
+        the day before. Most of the photos are black and white, and may contain glitches and
+        specks caused by e.g. the radiation present on the Martian surface.
+    </span>
     <div id="mission-info">
         <span id="rover-status"><b>Rover status:</b> {{ roverStatus }}</span>
-        <span id="photo-date"><b>Latest photos taken on:</b> {{ photoDate }}</span>
+        <span id="photo-date"><b>Currently displayed photos taken on:</b> {{ photoDate }}</span>
     </div>
     
     <div v-for="camera in cameras">
@@ -15,7 +26,7 @@
                 <span class="button normaltext"> ({{ imageURLs.length }})</span>
             </template>
             <template v-slot:content>
-                <div class="grid-container">
+                <div class="grid-container" id="accordion-bg">
                     <img v-for="imageURL in imageURLs" :src=imageURL class="rover-img">
                 </div>
             </template>
@@ -43,6 +54,7 @@ export default {
         fetch(this.apiAddress)
             .then(res => res.json())
             .then(data => this.getData(data))
+            // TODO: add error handling when connecting to API
             .catch(err => console.log(err.message))
     },
     components: {
@@ -81,6 +93,14 @@ export default {
 </script>
 
 <style>
+    #site-blurb {
+        display: flex;
+        text-align: center;
+        margin: auto;
+        margin-bottom: 1%;
+        max-width: 650px;
+    }
+
     #mission-info {
         display: flex;
         justify-content: center;
@@ -121,6 +141,10 @@ export default {
         font-weight: 600;
         color: #6fe5b0;
         margin-right: 4px;
+    }
+
+    #accordion-bg {
+        background-color: #393939;
     }
 
     .rover-img {
