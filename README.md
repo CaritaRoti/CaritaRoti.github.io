@@ -9,4 +9,5 @@ CuriosityCam is available online [here](https://caritaroti.github.io/).
 - Error handling on API connection and data fetching
 - UI fine tuning on accordion elements: an icon that shows that the user can open and close them
 - expand/close all accordions button
+- update favicon
 - (low priority) add an option to browse photos based on days or sols
