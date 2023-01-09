@@ -44,9 +44,7 @@ export default {
         return {
             roverStatus: '',
             photoDate: '',
-            imageURLs: [],
             images: {},
-            showImages: false,
             apiAddress: 'https://mars-photos.herokuapp.com/api/v1/rovers/curiosity/latest_photos'
         }
     },
@@ -77,15 +75,7 @@ export default {
                     .push(imgUrl);
                 
             }
-            console.log(this.images)
             return
-        },
-
-        /**
-         * Toggles image showing
-         */
-        toggleShowImages() {
-            this.showImages = !this.showImages
         }
     }
     
