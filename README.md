@@ -1,29 +1,10 @@
-# vue-project
+# CuriosityCam
 
-This template should help get you started developing with Vue 3 in Vite.
+CuriosityCam is a web app that fetches photos taken by the NASA Mars rover Curiosity from the [NASA Mars Rover Photos REST API](https://api.nasa.gov/).
 
-## Recommended IDE Setup
+Visit CuriosityCam [here](https://caritaroti.github.io/).
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Current to do list:
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+- Error handling on API connection and data fetching
+- UI fine tuning on accordion elements: an icon that shows that the user can open and close them
