@@ -1,22 +1,31 @@
 <template>
-    <h2>status: {{ roverStatus }}</h2>
-    <h2>Latest photos taken on: {{ photoDate }}</h2>
+    <div id="mission-info">
+        <span id="rover-status"><b>Rover status:</b> {{ roverStatus }}</span>
+        <span id="photo-date"><b>Latest photos taken on:</b> {{ photoDate }}</span>
+    </div>
+    
     <div v-for="camera in cameras">
         <h2>{{ camera.full_name }}</h2>
     </div>
     <div v-for="(imageURLs, cameraName) in images">
-        <button v-on:click="toggleShowImages">
-            <span v-if="!showImages">Show images from {{ cameraName }}</span>
-            <span v-if="showImages">Hide images from {{ cameraName }}</span>
-        </button>
-        <div v-if="showImages">
-            <img v-for="imageURL in imageURLs" :src=imageURL>
-        </div>
+        <curiosity-accordion class="accordion">
+            <template v-slot:title>
+                <span class="button-normaltext">Photos from</span>
+                <span class="colored-text"> {{ cameraName }} </span>
+                <span class="button normaltext"> ({{ imageURLs.length }})</span>
+            </template>
+            <template v-slot:content>
+                <div class="grid-container">
+                    <img v-for="imageURL in imageURLs" :src=imageURL class="rover-img">
+                </div>
+            </template>
+        </curiosity-accordion>
     </div>
+    
 </template>
 
 <script>
-import { onMounted } from 'vue';
+import CuriosityAccordion from './CuriosityAccordion.vue';
 
 export default {
     name: 'CuriosityCamera',
@@ -35,6 +44,9 @@ export default {
             .then(res => res.json())
             .then(data => this.getData(data))
             .catch(err => console.log(err.message))
+    },
+    components: {
+        CuriosityAccordion
     },
     methods: {
         /**
@@ -66,5 +78,55 @@ export default {
     }
     
 }
-
 </script>
+
+<style>
+    #mission-info {
+        display: flex;
+        justify-content: center;
+    }
+
+    #rover-status {
+        margin-inline: 2%;
+    }
+
+    #photo-date {
+        margin-inline: 2%;
+    }
+
+    .accordion {
+        margin: 1%;
+    }
+
+    button {
+        width: 100%;
+        height: 50px;
+        padding: 1%;
+        font-size: medium;
+        
+        line-height: 150%;
+        display: flex;
+        align-items: center;
+        background-color: #393939;
+        border-color: transparent;
+    }
+
+    .button-normaltext {
+        color: white;
+        font-weight: normal;
+        margin-right: 4px;
+    }
+
+    .colored-text {
+        font-weight: 600;
+        color: #6fe5b0;
+        margin-right: 4px;
+    }
+
+    .rover-img {
+        width: 200px;
+        margin: 5px;
+        display: flexbox;
+        justify-content: center;
+    }
+</style>

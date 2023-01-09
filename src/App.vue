@@ -1,3 +1,12 @@
+<template>
+  <header>
+    <h1>
+      Curiosity<span>Cam</span>
+    </h1>
+  </header>
+  <CuriosityCamera />
+</template>
+
 <script>
 import CuriosityCamera from './components/CuriosityCamera.vue'
 
@@ -9,35 +18,25 @@ export default {
 }
 </script>
 
-<template>
-  <CuriosityCamera />
-</template>
-
 <style scoped>
 header {
   line-height: 1.5;
+  font-size: large;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  margin-bottom: 1%;
+  padding: 0;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+header h1 {
+  color: #41b883;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+header h1 span {
+  color: #d0d0d0;
+  font-weight: 400;
 }
 </style>
